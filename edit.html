@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <hr>
+        <h1>List of students</h1>
+        <hr>
+        <div>
+            <div class="row" id="students">
+            </div>
+        </div>
+    </div>
+    <div id="editStudentModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit student</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+    
+                <div class="modal-body">
+                    <form id="editForm" method="POST" action="http://localhost:3001/update">
+                        <div class="form-group">
+                            <label for="name">name</label>
+                            <input class="form-control" name="name" id="name">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="id">id</label>
+                            <input class="form-control" name="id" id="id">
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">gender</label>
+                            <input class="form-control" name="gender" id="gender">
+                        </div>
+    
+                        <!--Other fields-->
+    
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script> 
+    const loadStudents = () => {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://localhost:3001/getlist", false);
+    xhttp.send();
+
+    const students = JSON.parse(xhttp.responseText);
+    let x = ''
+    for (let student of students) {
+     x +=  `     
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="id">${student.id}</h5>
+                        <h6 class="name">${student.Name}</h6>
+
+                        <div>gender: ${student.gender}</div>
+                        <div>age: ${student.age}</div>
+                        <hr>
+                        <button type="button" class="btn btn-danger" onclick="deleteStudent(${student.id})">Delete</button>
+                        <button types="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#editStudentModal" onClick="setEditModal(${student.id})">
+                            Edit
+                        </button>
+                        </div>
+                        </div>
+                        </div> `
+
+                        
+                    }
+                    document.getElementById('students').innerHTML = document.getElementById('students').innerHTML + x;
+                }
+                    
+                        
+loadStudents();
+const deleteStudent = (id) => {
+    const xhttp = new XMLHttpRequest();
+
+    xhttp.open("DELETE", `http://localhost:3001/student/${id}`, false);
+    xhttp.send();
+
+    location.reload();
+}
+    </script>
+    
+   
+    
+</body>
+</html>
+

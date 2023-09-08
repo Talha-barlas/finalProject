@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form">
+    <h1>Rigistration</h1>
+<form id="creatform" method="post" action="http://localhost:3001/create" >
+    <label for="username">NAME:</label>
+    <input type="text" name="username" id="username1">
+    <br><br>
+    <label for="age">Age</label>
+    <input type="number" name="age" id="age1">
+    
+    <br><br>
+    <input type="radio" name="gender" value="male" id="male1">
+    <label for="male">Male</label>
+    <input type="radio" name="gender" value="female" id="female1">
+    <label for="female">Female</label>
+    <br><br>
+    <label for="city">City:</label>
+    <select name="city" id="city1">
+        <option value="Islamabad">Islamabad</option>
+        <option value="Rawalpindi">Rawalpindi</option>
+        <option value="Lahore">Lahore</option>
+        <option value="Peshawar">Peshawar</option>
+        <option value="Abbotabad">Abbotabad</option>
+        <option value="Sialkot">Sialkot</option>
+        </select>
+         <br><br>
+         <input type="submit" value="submit">
+         <br><br>
+         <a href="http://127.0.0.1:5500/edit.html">Edit</a>
+        <!-- <button onclick="create()">Submit</button> -->
+    </div>
+
+</form>
+    
+</body>
+<script>
+//     const create = () => {
+//     const xhttp = new XMLHttpRequest();
+
+//     xhttp.open("POST", `http://localhost:3001/create`, true);
+//     xhttp.send(`username=${document.getElementById('username1').value}&age=${document.getElementById('age1').value}&gender=${document.getElementById('male').value}&city=${document.getElementById('city1').value}`);
+//     location.reload();
+// }
+//  
+</script>
+</html>
